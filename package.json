@@ -1,0 +1,8 @@
+{
+  "name": "ym",
+  "version": "4.0.0",
+  "description": "Карта с отображением стоимости доставки",
+  "main": "index.html",
+  "author": "Aleksei Sablin as IIICoder <coder@sablin.pp.ua>",
+  "license": "MIT"
+}

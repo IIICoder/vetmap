@@ -1,0 +1,20 @@
+html, body {
+  background-color: #f8f9fa;
+}
+#map {
+  width: 100%;
+  height: 95vh;
+}
+
+.container {
+  margin-top:20px;
+}
+.row {
+  background: #f8f9fa;
+}
+
+.col {
+  border: solid 1px #6c757d;
+  padding: 10px;
+  margin: 10px 5px;
+}

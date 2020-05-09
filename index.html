@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru_RU">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="./ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <title>Стоимость доставки</title>
+  <link rel="apple-touch-icon" sizes="57x57" href="./apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="./apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="./apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="./apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="./apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="./android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="./favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script defer
+    src="https://api-maps.yandex.ru/2.1/?apikey=3882ddf4-6521-4acf-9b4f-527507ad01e0&lang=ru_RU&coordorder=longlat"
+    type="text/javascript">
+    </script>
+  <script defer src="./map.js"></script>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div id="form" style="display: none;">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+          <h2 style="text-align: center;"><b><u>ДАННЫЕ ПО ДОСТАВКЕ</u></b></h2><br />
+          <div class="form-group">
+            <label for="address"><b>Адрес доставки*</b></label>
+            <input type="text" class="form-control" id="address" placeholder="Заполнять обязательно">
+          </div>
+          <div class="form-group">
+            <label for="address2"><b>Подъезд</b></label>
+            <input type="number" class="form-control" id="address2">
+          </div>
+          <div class="form-group">
+            <label for="address3"><b>Квартира</b></label>
+            <input type="number" class="form-control" id="address3">
+          </div>
+          <div class="form-group">
+            <label for="phone1"><b>Основной номер*</b></label>
+            <input type="number" class="form-control" id="phone1" placeholder="Заполнять обязательно">
+          </div>
+          <div class="form-group">
+            <label for="phone2">Дополнительный номер</label>
+            <input type="number" class="form-control" id="phone2">
+          </div>
+          <div class="form-group">
+            <label for="price1"><b>Стоимость доставки*</b></label>
+            <input type="number" class="form-control" id="price1" placeholder="Заполнять обязательно" value="500">
+          </div>
+          <div class="form-group">
+            <label for="price2">Стоимость подъема</label>
+            <input type="number" class="form-control" id="price2" value="0">
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="showBlank()">Продолжить</button>
+          <button type="submit" class="btn" onclick="showMap()">Вернуться</button>
+        </div>
+        <div class="col-3">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="blank" style="display: none;">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <i>Дата доставки: </i> <b id="blank_date"></b>
+        </div>
+        <div class="col col-7">
+          <i>Стоимость доставки: </i><b id="blank_price1"></b><br />
+          <i>Стоимость подъёма: </i><b id="blank_price2"></b>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <i>Адрес:<br /></i>
+          <b id="blank_address"></b><br />
+          <b id="blank_address2"></b><br />
+          <b id="blank_address3"></b>
+        </div>
+        <div class="col">
+          <i>Телефоны:</i><br />
+          <b id="blank_phone1"></b><br />
+          <b id="blank_phone2"></b><br />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" style="text-align: center;">
+          <p>Основной номер телефона</p>
+          <img id="qrcodeTEL" src="" alt="" title="" />
+        </div>
+        <div id="qrTel2DIV" class="col" style="display: none; text-align: center;">
+          <p>Дополнительный номер телефона</p>
+          <img id="qrcodeTEL2" src="" alt="" title="" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" style="text-align: left;">
+          <p>2GIS</p>
+          <img id="qrcode2GIS" src="" alt="" title="" />
+        </div>
+        <div class="col" style="text-align: center;">
+          <p>Яндекс.Карты</p>
+          <img id="qrcodeYM" src="" alt="" title="" />
+        </div>
+        <div class="col" style="text-align: right;">
+          <p>Google Maps</p>
+          <img id="qrcodeGM" src="" alt="" title="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
